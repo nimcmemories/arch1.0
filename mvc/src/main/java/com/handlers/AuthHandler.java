@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthHandler {
 	@RequestMapping(value="/ok",method = RequestMethod.GET)
 	public String isOk(){
-		return "Arc1.0 Auth Service working OK.";
+		return "Arc1.0 MVC OK.";
 	}
 }

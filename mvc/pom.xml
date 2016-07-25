@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
   <modelVersion>4.0.0</modelVersion>  
-  <groupId>arch1.0_auth</groupId>  
-  <artifactId>arch1.0_auth</artifactId>  
+  <groupId>arch1.0_mvc</groupId>  
+  <artifactId>arch1.0_mvc</artifactId>  
   <packaging>war</packaging>  
   <version>0.0.1-SNAPSHOT</version>  
-  <name>Architecture 1.0 authorization framework</name>  
+  <name>Architecture 1.0 MVC  framework</name>  
   <url>http://maven.apache.org</url>  
   <dependencies>  
     <dependency>  
@@ -26,7 +26,7 @@
   </dependency>  
  </dependencies>  
  <build>  
-  <finalName>authservice</finalName>  
+  <finalName>mvc</finalName>  
   
   <plugins>  
    <plugin>  
