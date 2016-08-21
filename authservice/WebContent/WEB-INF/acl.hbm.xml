@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.bean">
+    <class name="AclCategory" table="t_aclcategory">
+        <id name="aclCatId" column="aclcatid">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="_default" column="_default" />
+        <set name="setAclEvents" table="t_aclevents"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="aclcatid" not-null="true" />
+            </key>
+            <one-to-many class="com.bean.AclEvents" />
+        </set>
+    </class> 
+    <class name="AclEvetns" table="t_aclevents">
+        <id name="aclEventId" column="aclEventId">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="_default" column="_default" />
+        <many-to-one name="aclCatId" class="com.bean.AclCategory" fetch="select">
+            <column name="aclcatid" not-null="true" />
+        </many-to-one>
+    </class> 
+</hibernate-mapping>

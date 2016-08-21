@@ -2,8 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
   <modelVersion>4.0.0</modelVersion>  
   <groupId>arch1.0_auth</groupId>  
-  <artifactId>arch1.0_auth</artifactId>  
-  <packaging>war</packaging>  
+  <artifactId>arch1.0_auth</artifactId>    
   <version>0.0.1-SNAPSHOT</version>  
   <name>Architecture 1.0 authorization framework</name>  
   <url>http://maven.apache.org</url>  
@@ -13,11 +12,11 @@
    <artifactId>log4j</artifactId>
    <version>${log4j.version}</version>
   </dependency>
-    <dependency>  
-   <groupId>javax.servlet</groupId>  
-   <artifactId>javax.servlet-api</artifactId>  
-   <version>3.1.0</version>  
-  </dependency>  
+     <dependency>  
+	<groupId>javax.servlet</groupId>  
+	 <artifactId>javax.servlet-api</artifactId>  
+	 <version>3.1.0</version>  
+	</dependency>
    <dependency>
    <groupId>org.springframework</groupId>
    <artifactId>spring-jdbc</artifactId>
@@ -85,4 +84,4 @@
  </properties>  
   
     
-</project>  
+</project> 

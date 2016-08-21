@@ -6,7 +6,7 @@ public class BaseBean {
 	private Long id;
 
 	public String getName() {
-		System.out.println(" name method called : ....");
+		System.out.println(" n ame method called : ....");
 		return name1;
 	}
 

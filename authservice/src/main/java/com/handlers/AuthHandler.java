@@ -5,18 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.BaseBean;
-import com.model.TestDao;
+import com.bean.AclCategoryService;
 
 @RestController
 public class AuthHandler {
 	@Autowired
-	TestDao testDao;
+	AclCategoryService aclCategoryService;
 	
 	@RequestMapping(value="/ok",method = RequestMethod.GET)
 	public String isOk(){
-		BaseBean bb = testDao.getTestObj();
-		System.out.println(" my name is : " + bb.getName());
+		aclCategoryService.getAclCategory();
 		return "Arc1.0 Auth Service working OK.";
 	}
 }
