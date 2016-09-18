@@ -11,6 +11,9 @@ import com.bean.service.AclDAOServiceImpl;
 public class AuthHandler {
 	AclDAOService aclDAOServiceImpl;
 
+
+	 
+	
 	public void setAclDAOServiceImpl(AclDAOServiceImpl aclDAOServiceImpl) {
 		this.aclDAOServiceImpl = aclDAOServiceImpl;
 	}
