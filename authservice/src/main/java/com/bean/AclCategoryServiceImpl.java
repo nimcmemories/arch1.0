@@ -9,7 +9,6 @@ public class AclCategoryServiceImpl implements AclCategoryService{
 	@Autowired
 	 SessionFactory sessionFactory;
 	 Session session = null;
-	 Transaction tx = null;
 
 	@Override
 	public void getAclCategory() {

@@ -16,7 +16,7 @@ public class SessionFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("filter init method..");
+		System.out.println("1 filter init method..");
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class SessionFilter implements Filter {
 		System.out.println("do filter method..");
 		
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> str= restTemplate.getForEntity("http://localhost:8080/authservice/ok", String.class);
-		System.out.println(" response from rest : " + str);
+		//ResponseEntity<String> str= restTemplate.getForEntity("http://localhost:8080/authservice/ok", String.class);
+		//System.out.println(" response from rest : " + str);
 		chain.doFilter(request, response);
 	}
 
