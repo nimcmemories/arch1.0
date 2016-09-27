@@ -6,20 +6,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bean.service.AclDAOService;
 import com.bean.service.AclDAOServiceImpl;
+import com.bean.service.RoleDAOService;
 
 @RestController
 public class AuthHandler {
 	AclDAOService aclDAOServiceImpl;
-
+	RoleDAOService roleDAOServiceImpl;
 
 	 
 	
+	public void setRoleDAOServiceImpl(RoleDAOService roleDAOServiceImpl) {
+		this.roleDAOServiceImpl = roleDAOServiceImpl;
+	}
+
 	public void setAclDAOServiceImpl(AclDAOServiceImpl aclDAOServiceImpl) {
 		this.aclDAOServiceImpl = aclDAOServiceImpl;
 	}
 
 	@RequestMapping(value="/ok",method = RequestMethod.GET)
 	public String isOk(){
+		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
 		aclDAOServiceImpl.getAcl();
 		return "Arc1.0 Auth Service working OK.";
 	}
