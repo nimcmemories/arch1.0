@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.persistence.service.proxy.TestDAOService;
 
@@ -38,11 +40,23 @@ public class MVCHandler {
 		System.out.println("model values ; " + model.asMap().toString());
 	}
 
-	@RequestMapping(value = "/ok", method = RequestMethod.GET)
-	public String isOk() {
-		
+	@RequestMapping(value = "/ok", method = RequestMethod.POST)
+	public @ResponseBody String isOk() {
+		System.out.println("blank value of auth for this request : " );
 		System.out.println("is session new : "  + testDAOServiceObj.getResult());
-		return "Arc1.0 MVC OK.";
+		return "{\"status\":\"ok\"}";
 
 	}
+	
+	
+	/**
+	 * @return response json includes status and other messages
+	 */
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public @ResponseBody String authenticate(@RequestParam("formData") String data) {
+		System.out.println("blank value of auth for this request : " + data);
+		return "{\"status\":\"ok\"}";
+
+	}
+	
 }
