@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.apicaller.AuthAPICaller;
 import com.persistence.service.proxy.TestDAOService;
 
 /**
@@ -55,6 +56,7 @@ public class MVCHandler {
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public @ResponseBody String authenticate(@RequestParam("formData") String data) {
 		System.out.println("blank value of auth for this request : " + data);
+		AuthAPICaller.authenticateUser();
 		return "{\"status\":\"ok\"}";
 
 	}

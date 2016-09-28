@@ -1,7 +1,9 @@
 package com.handlers;
 
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bean.service.AclDAOService;
@@ -28,5 +30,13 @@ public class AuthHandler {
 		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
 		aclDAOServiceImpl.getAcl();
 		return "Arc1.0 Auth Service working OK.";
+	}
+	
+	@RequestMapping(value="/auth",method = RequestMethod.POST)
+	public JSONObject getAuthAndACLList(JSONObject formData){
+		System.out.println(" call from pardesi API " + formData.toString());
+		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
+		aclDAOServiceImpl.getAcl();
+		return new JSONObject(roleDAOServiceImpl.getServiceRoleModel());
 	}
 }

@@ -14,7 +14,7 @@ $('.login').on('submit', function(e) {
   $this.addClass('loading');
   $state.html('Authenticating');
   var data = "nimesh";
-  var JsonData = {"method":"POST","formData":data,"__eventid":2,"dataType":"json","url":""};
+  var JsonData = {"method":"POST","formData":data,"__eventid":2,"dataType":"json","url":"/auth"};
   sys.AJAXCall(JsonData, login.responseOfTestHelper);
   setTimeout(function() {
     $this.addClass('ok');
