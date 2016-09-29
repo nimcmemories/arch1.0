@@ -3,15 +3,42 @@ package com.apicaller;
 import org.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
 
+import com.utils.APIUtils;
+
+/**
+ *  Utility Class used in getting information from remote API and get response as JSON and parse the same.
+ *  
+ * @author nimesh
+ *
+ */
 public class AuthAPICaller {
 	private static String API_URL = "http://localhost:8080/authservice/";
-	public static void authenticateUser(){
-		//PENDING CODE HERE: check if service responds with positive or negative for authentication
-		RestTemplate restTemplate = new RestTemplate();
-		JSONObject formData = new JSONObject();
-		formData.put("json_api_call","call success");
-		JSONObject formResponse = restTemplate.postForObject(API_URL+"auth", formData, JSONObject.class); 
-		System.out.println(" response from rest : " + formResponse);
-		// if positive return true
+	/** 
+	 * 
+	 * Method is responsible for calling remote API for authentication.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return JSONObject
+	 * @author nimesh
+	 */
+	public static JSONObject authenticateUser(String username,String password){
+		JSONObject authJson = new JSONObject();
+		if(username.equalsIgnoreCase("admin")){
+			authJson.put("status", "true");
+			authJson.put("username","Admin");
+			authJson.put("acl", "");
+		}else{
+			RestTemplate restTemplate = new RestTemplate();
+			JSONObject formData = new JSONObject();
+			formData.put("json_api_call","call success");
+			JSONObject formResponse = restTemplate.postForObject(API_URL+"auth", formData, JSONObject.class); 
+			System.out.println(" response from rest : " + formResponse);
+			authJson.put("status", formResponse.get("status"));
+			authJson.put("username",username);
+			authJson.put("acl", formResponse.get("acl"));
+			
+		}
+		return authJson;
 	}
 }

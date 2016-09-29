@@ -56,7 +56,7 @@ public class MVCHandler {
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public @ResponseBody String authenticate(@RequestParam("formData") String data) {
 		System.out.println("blank value of auth for this request : " + data);
-		AuthAPICaller.authenticateUser();
+		//AuthAPICaller.authenticateUser(data);
 		return "{\"status\":\"ok\"}";
 
 	}

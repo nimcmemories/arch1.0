@@ -33,3 +33,14 @@ sys.AJAXCall = function(data,responseFunction){
         },timeout:30*60*1000
 	});		
 };
+sys.getFormData=function(formId){
+	return $("#"+formId+"").serializeArray();
+};
+sys.getFormJSON = function(formId){
+	var jsonData = sys.getFormData(formId);
+	var result = { };
+	$.each(jsonData,function(){result[this.name] = this.value;});
+	return result;
+};
+/*
+ */

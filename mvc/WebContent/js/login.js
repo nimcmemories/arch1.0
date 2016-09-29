@@ -1,7 +1,10 @@
 var login = {};
 
 login.responseOfTestHelper = function(data){
-	alert(data);
+	/*
+	 * method will redirect to index.html on success
+	 */
+	$(location).attr('href', sys.home+"index.html");
 }
 var working = false;
 $('.login').on('submit', function(e) {
@@ -13,7 +16,9 @@ $('.login').on('submit', function(e) {
   
   $this.addClass('loading');
   $state.html('Authenticating');
-  var data = "nimesh";
+  var formId = "login";
+  var data = JSON.stringify(sys.getFormJSON(formId));
+  alert("data : login.js from form params : " + JSON.stringify(data));
   var JsonData = {"method":"POST","formData":data,"__eventid":2,"dataType":"json","url":"/auth"};
   sys.AJAXCall(JsonData, login.responseOfTestHelper);
   setTimeout(function() {
