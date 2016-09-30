@@ -1,15 +1,25 @@
 package com.model;
 
+import java.util.Set;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.json.JSONObject;
 
+import com.bean.AclEvents;
 import com.bean.BaseBean;
 
+/**
+ * 
+ * System wide all available roles and a set of their accessible roles.
+ * 
+ * @author nimesh
+ *
+ */
 public class RoleModel extends BaseBean {
 	private Long roleId;
 	private String name;
 	private String description;
-	
+	private Set<ACListModel> acListModel;
 	
 	public RoleModel() {
 	}
@@ -23,11 +33,9 @@ public class RoleModel extends BaseBean {
 	public String getName() {
 		return name;
 	}
-	@JsonProperty("Name")
 	public void setName(String name) {
 		this.name = name;
 	}
-	@JsonProperty("Description")
 	public String getDescription() {
 		return description;
 	}
@@ -35,7 +43,6 @@ public class RoleModel extends BaseBean {
 		this.description = description;
 	}
 	
-	@JsonProperty("roleId")
 	public Long getRoleId() {
 		return roleId;
 	}
@@ -46,6 +53,14 @@ public class RoleModel extends BaseBean {
 	@Override
 	public String toString(){
 		return new JSONObject(this).toString();
+	}
+
+	public Set<ACListModel> getAcListModel() {
+		return acListModel;
+	}
+
+	public void setAcListModel(Set<ACListModel> acListModel) {
+		this.acListModel = acListModel;
 	}
 	
 }

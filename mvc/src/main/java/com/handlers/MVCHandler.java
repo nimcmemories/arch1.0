@@ -58,7 +58,6 @@ public class MVCHandler {
 		System.out.println("blank value of auth for this request : " + data);
 		//AuthAPICaller.authenticateUser(data);
 		return "{\"status\":\"ok\"}";
-
 	}
 	
 }

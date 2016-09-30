@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bean.service.AclDAOService;
 import com.bean.service.AclDAOServiceImpl;
 import com.bean.service.RoleDAOService;
+import com.model.ACListModel;
 
 @RestController
 public class AuthHandler {
@@ -34,8 +35,11 @@ public class AuthHandler {
 	
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
 	public JSONObject getAuthAndACLList(JSONObject formData){
-		System.out.println(" call from pardesi API " + formData.toString());
+		
+		System.out.println(" getAuthAndACLList : call from pardesi API  " + formData.toString());
 		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
+		ACListModel acListModel = roleDAOServiceImpl.getServiceRoleModel().getAcListModel().iterator().next();
+		System.out.println(" value from acListModel" + acListModel.getDescription());
 		aclDAOServiceImpl.getAcl();
 		return new JSONObject(roleDAOServiceImpl.getServiceRoleModel());
 	}

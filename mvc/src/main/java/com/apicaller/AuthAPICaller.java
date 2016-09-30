@@ -24,11 +24,14 @@ public class AuthAPICaller {
 	 */
 	public static JSONObject authenticateUser(String username,String password){
 		JSONObject authJson = new JSONObject();
+		
 		if(username.equalsIgnoreCase("admin")){
+			System.out.println(" authentication for admin ");
 			authJson.put("status", "true");
 			authJson.put("username","Admin");
 			authJson.put("acl", "");
 		}else{
+			System.out.println(" authentication for other users :");
 			RestTemplate restTemplate = new RestTemplate();
 			JSONObject formData = new JSONObject();
 			formData.put("json_api_call","call success");

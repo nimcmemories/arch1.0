@@ -10,6 +10,24 @@
         </id>
         <property name="name" column="name" />
         <property name="description" column="description" />
+        <set name="acListModel"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="roleid" not-null="true" />
+            </key>
+            <one-to-many class="com.model.ACListModel" />
+        </set>
     </class> 
+    
+    <class name="com.model.ACListModel" table="t_aclist">
+    	 <id name="aclListId" type="java.lang.Long" column="aclistid">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="description" column="description" />
+        <property name="eventId" column="eventid" />
+        <property name="roleId" column="roleId" />
+        <property name="accessRight" column="accessright" />
+    </class>
     
 </hibernate-mapping>
