@@ -1,6 +1,8 @@
 package com.apicaller;
 
 import org.json.JSONObject;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import com.utils.APIUtils;
@@ -33,6 +35,7 @@ public class AuthAPICaller {
 		}else{
 			System.out.println(" authentication for other users :");
 			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
 			JSONObject formData = new JSONObject();
 			formData.put("json_api_call","call success");
 			JSONObject formResponse = restTemplate.postForObject(API_URL+"auth", formData, JSONObject.class); 

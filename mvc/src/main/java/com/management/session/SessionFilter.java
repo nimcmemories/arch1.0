@@ -40,6 +40,9 @@ public class SessionFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 		System.out.println("do filter method..");
 		System.out.println(" is new session from filter check " + SessionValidator.checkSession((HttpServletRequest)request));
+		
+		
+		
 		if(!filterRequestForValidSession((HttpServletRequest) request)){
 			System.out.println("session not validated hence auth set as failed : ");
 			HttpServletResponse res = ((HttpServletResponse) response);
@@ -71,6 +74,9 @@ public class SessionFilter implements Filter {
 	private boolean filterRequestForValidSession(HttpServletRequest request){
 		System.out.println(" url hit in session filter : " + request.getRequestURI());
 		HttpSession session = request.getSession();
+		
+		
+		
 		if(SessionValidator.checkSession(request)){
 			System.out.println("valid request for login");
 			JSONObject formData = new JSONObject(((HttpServletRequest)request).getParameter("formData"));
@@ -84,17 +90,24 @@ public class SessionFilter implements Filter {
 				JSONObject authJson =  AuthAPICaller.authenticateUser(userName,password);
 				if(APIUtils.isExpectedJSON(authJson, "acl")){
 					request.setAttribute("authJson", authJson);
-					request.getSession().setAttribute("authJson", authJson);
+					request.getSession().setAttribute("userInfo", authJson);
 					return true;
 				}
 			}
 		}else{
 			/*
+			 * if session does not contain user information then 
+			 * invalidate user session
+			 */
+			if(session.getAttribute("userInfo")!=null){
+				System.out.println("userSession is not null and has a valid session with user detail and ACLs");
+			/*
 			 * controll flow may fall here only when the session is old
 			 * and need to check for other ACLs
 			 * 
 			 */
-			return true;
+				return true;
+			}
 		}
 		session.invalidate();
 		return false;

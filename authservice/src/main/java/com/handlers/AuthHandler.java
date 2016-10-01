@@ -1,6 +1,8 @@
 package com.handlers;
 
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,13 +36,15 @@ public class AuthHandler {
 	}
 	
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
-	public JSONObject getAuthAndACLList(JSONObject formData){
+	public JSONObject getAuthAndACLList(@RequestBody JSONObject formData){
 		
 		System.out.println(" getAuthAndACLList : call from pardesi API  " + formData.toString());
 		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
 		ACListModel acListModel = roleDAOServiceImpl.getServiceRoleModel().getAcListModel().iterator().next();
 		System.out.println(" value from acListModel" + acListModel.getDescription());
 		aclDAOServiceImpl.getAcl();
-		return new JSONObject(roleDAOServiceImpl.getServiceRoleModel());
+		JSONObject responseJSON = new JSONObject(roleDAOServiceImpl.getServiceRoleModel());
+		responseJSON.put("status", 200);
+		return responseJSON;
 	}
 }
