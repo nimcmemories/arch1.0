@@ -26,4 +26,15 @@
         <property name="_default" column="_default" />
         
     </class> 
+    
+    <class name="com.model.UserModel" table="t_user">
+        <id name="userId" column="userid">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" />
+        <property name="password" column="password" />
+       <one-to-one name="roleModel" class="com.model.RoleModel"
+			cascade="save-update" />
+        
+    </class> 
 </hibernate-mapping>

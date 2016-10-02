@@ -61,7 +61,7 @@ public class SessionFilter implements Filter {
 			 * EX : /MVC/DO/LISTUSER is this URL allowed to end user ? 
 			 * if yes move forward 
 			*/
-			JSONObject authJson = (JSONObject) ((HttpServletRequest)request).getSession().getAttribute("authJson");
+			JSONObject authJson = (JSONObject) ((HttpServletRequest)request).getSession().getAttribute("userInfo");
 			System.out.println(" we have to response as this is a valid request or not :-" + authJson);
 		}
 		chain.doFilter(request, response);
@@ -77,9 +77,16 @@ public class SessionFilter implements Filter {
 		
 		
 		
-		if(SessionValidator.checkSession(request)){
+		if(SessionValidator.checkSession(request) || request.getRequestURI().equals("/mvc/do/auth")){
 			System.out.println("valid request for login");
-			JSONObject formData = new JSONObject(((HttpServletRequest)request).getParameter("formData"));
+			JSONObject formData = null;
+			
+			try{
+				formData = new JSONObject(((HttpServletRequest)request).getParameter("formData"));
+			}catch(Exception e){
+				session.invalidate();
+				return false;
+			}
 			System.out.println(" formData from request " +((HttpServletRequest)request).getParameter("formData"));
 			String userName = formData.getString("username");
 			String password = formData.getString("password");
@@ -88,7 +95,9 @@ public class SessionFilter implements Filter {
 			}else{
 				System.out.println("authenticate user : " + userName);
 				JSONObject authJson =  AuthAPICaller.authenticateUser(userName,password);
-				if(APIUtils.isExpectedJSON(authJson, "acl")){
+				System.out.println(" ~~~~ after  authentication attempt " + authJson);
+				if(APIUtils.isExpectedJSON(authJson, "responseInfo") && (Double)authJson.get("status") == 200){
+					System.out.println("~~~ responseInfo is present in the JSON");
 					request.setAttribute("authJson", authJson);
 					request.getSession().setAttribute("userInfo", authJson);
 					return true;
@@ -109,6 +118,7 @@ public class SessionFilter implements Filter {
 				return true;
 			}
 		}
+		System.out.println("returning for invalid session : " );
 		session.invalidate();
 		return false;
 	}

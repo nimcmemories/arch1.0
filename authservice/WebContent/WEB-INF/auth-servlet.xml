@@ -4,7 +4,7 @@
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -41,6 +41,7 @@
  <bean id="authHandler" class="com.handlers.AuthHandler">
  	<property name="aclDAOServiceImpl" ref="aclDaoService"/>
  	<property name="roleDAOServiceImpl" ref="roleDaoService"/>
+ 	<property name="userDAOServiceImpl" ref="userDaoService"/>
  	
  </bean>
  <bean id="persistenceExceptionTranslationPostProcessor"
@@ -54,6 +55,8 @@
  <bean id="roleDaoService" class="com.bean.service.RoleDAOServiceImpl" >
  	<property name="roleDAOImpl" ref="roleDaoImpl"/>
  </bean>
- 
- 
+  <bean id="userDAOImpl" class="com.bean.dao.UserDAOImpl"/>
+  <bean id="userDaoService" class="com.bean.service.UserDAOServiceImpl" >
+ 	<property name="userDAOImpl" ref="userDAOImpl"/>
+ </bean>
 </beans>  

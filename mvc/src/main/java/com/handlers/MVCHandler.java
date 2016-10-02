@@ -17,17 +17,6 @@ import com.persistence.service.proxy.TestDAOService;
  */
 @Controller
 public class MVCHandler {
-	@Autowired
-	private TestDAOService testDAOServiceObj;
-	
-	
-	public TestDAOService getTestDAOServiceObj() {
-		return testDAOServiceObj;
-	}
-
-	public void setTestDAOServiceObj(TestDAOService testDAOServiceObj) {
-		this.testDAOServiceObj = testDAOServiceObj;
-	}
 
 	
 	/*
@@ -44,7 +33,6 @@ public class MVCHandler {
 	@RequestMapping(value = "/ok", method = RequestMethod.POST)
 	public @ResponseBody String isOk() {
 		System.out.println("blank value of auth for this request : " );
-		System.out.println("is session new : "  + testDAOServiceObj.getResult());
 		return "{\"status\":\"ok\"}";
 
 	}
