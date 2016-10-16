@@ -1,5 +1,8 @@
 package com.handlers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +34,7 @@ public class AuthHandler {
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
 	public JSONObject getAuthAndACLList(@RequestBody JSONObject formData){
 		
-		System.out.println(" getAuthAndACLList : call from pardesi API  " + formData.toString());
+		System.out.println(" getAuthAndACLList : call from alien API  " + formData.toString());
 		UserModel userModel;
 		JSONObject responseJSON = new JSONObject();
 		try{
@@ -43,7 +46,10 @@ public class AuthHandler {
 				responseJSON.put("status",411);
 				responseJSON.put("statusDescription","User is not authorized");
 			}else{
-				responseJSON.put("responseInfo", userModel.getRoleModel().getAcListModel());
+				Map<String, Object> userInfo = new HashMap<String,Object>();
+				userInfo.put("userACL", userModel.getRoleModel().getAcListModel());
+				userInfo.put("userLinkACL", userModel.getRoleModel().getLinkAclList());
+				responseJSON.put("responseInfo", userInfo);
 				responseJSON.put("status", 200);
 			}
 			System.out.println(" ~~~~~~~~~~~ userModel toString value: " + userModel);

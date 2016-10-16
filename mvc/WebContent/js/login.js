@@ -7,7 +7,8 @@ login.responseOfTestHelper = function(data){
 	$(location).attr('href', sys.home+"index.html");
 }
 var working = false;
-$('.login').on('submit', function(e) {
+$('#submit').on('click', function(e) {
+	alert("login button clicked");
   e.preventDefault();
   if (working) return;
   working = true;

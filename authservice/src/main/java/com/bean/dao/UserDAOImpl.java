@@ -18,6 +18,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO{
 		try{
 		userModel= (UserModel) query.list().get(0);
 		Hibernate.initialize(userModel.getRoleModel().getAcListModel());
+		Hibernate.initialize(userModel.getRoleModel().getLinkAclList());
 		System.out.println(" user model retrieved from DB : " + userModel);
 		}catch(Exception e){
 			e.printStackTrace();

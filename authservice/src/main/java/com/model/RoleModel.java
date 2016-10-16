@@ -20,6 +20,7 @@ public class RoleModel extends BaseBean {
 	private String name;
 	private String description;
 	private Set<ACListModel> acListModel;
+	private Set<ACLinkListModel> linkAclList;
 	
 	public RoleModel() {
 	}
@@ -61,6 +62,14 @@ public class RoleModel extends BaseBean {
 
 	public void setAcListModel(Set<ACListModel> acListModel) {
 		this.acListModel = acListModel;
+	}
+
+	public Set<ACLinkListModel> getLinkAclList() {
+		return linkAclList;
+	}
+
+	public void setLinkAclList(Set<ACLinkListModel> linkAclList) {
+		this.linkAclList = linkAclList;
 	}
 	
 }

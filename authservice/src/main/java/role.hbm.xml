@@ -17,6 +17,13 @@
             </key>
             <one-to-many class="com.model.ACListModel" />
         </set>
+         <set name="linkAclList"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="roleid" not-null="true" />
+            </key>
+            <one-to-many class="com.model.ACLinkListModel" />
+        </set>
     </class> 
     
     <class name="com.model.ACListModel" table="t_aclist">
@@ -28,6 +35,15 @@
         <property name="eventId" column="eventid" />
         <property name="roleId" column="roleId" />
         <property name="accessRight" column="accessright" />
+    </class>
+    
+    <class name="com.model.ACLinkListModel" table="t_linkacl">
+    	<id name="linkAclId" column="linkaclid" type="java.lang.Long">
+    		<generator class="native"/>
+    	</id>
+    	<property name="roleId" column="roleid"/>
+    	<property name="linkId" column="linkid"/>
+    	<property name="accessType" column="accesstype"/>
     </class>
     
 </hibernate-mapping>
