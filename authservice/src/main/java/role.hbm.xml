@@ -4,25 +4,60 @@
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
+
+	<class name="com.model.EventModel" table="t_aclevents">
+		<id name="aclEventId" type="java.lang.Long" column="acleventid">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="name"/>
+		<set name="aclCategory"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="aclcatid" not-null="true" />
+            </key>
+            <one-to-many class="com.model.ACLCategory" />
+        </set>
+        
+	</class>
+	<class name="com.model.LinkModel" table="t_links">
+		<id name="linkId" type="java.lang.Integer" column="linkid">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="name"/>
+		
+		<set name="eventModel"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="acleventid" not-null="true" />
+            </key>
+            <one-to-many class="com.model.EventModel" />
+        </set>
+	</class>
+	
     <class name="com.model.RoleModel" table="t_role">
         <id name="roleId" type="java.lang.Long" column="roleid">
             <generator class="native"/>
         </id>
         <property name="name" column="name" />
         <property name="description" column="description" />
-        <set name="acListModel"
-				inverse="true" lazy="true" fetch="select">
+        
+        <set name="eventModel" table="t_aclist"
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
             <key>
                 <column name="roleid" not-null="true" />
             </key>
-            <one-to-many class="com.model.ACListModel" />
+            <many-to-many entity-name="com.model.EventModel">
+                <column name="eventid" not-null="true" />
+            </many-to-many>
         </set>
-         <set name="linkAclList"
-				inverse="true" lazy="true" fetch="select">
+        <set name="linkModel" table="t_linkacl"
+        	inverse="false" lazy="true" fetch="select" cascade="all" >
             <key>
                 <column name="roleid" not-null="true" />
             </key>
-            <one-to-many class="com.model.ACLinkListModel" />
+            <many-to-many entity-name="com.model.LinkModel">
+                <column name="linkid" not-null="true" />
+            </many-to-many>
         </set>
     </class> 
     
@@ -36,6 +71,15 @@
         <property name="roleId" column="roleId" />
         <property name="accessRight" column="accessright" />
     </class>
+    
+    <class name="com.model.ACLCategory" table="t_aclcategory">
+    	<id name="aclCatId" column="aclcatid" type="java.lang.Long">
+    		<generator class="native"/>
+    	</id>
+    	<property name="name" column="name"/>
+    	<property name="_default" column="_default"/>
+    </class>
+    
     
     <class name="com.model.ACLinkListModel" table="t_linkacl">
     	<id name="linkAclId" column="linkaclid" type="java.lang.Long">

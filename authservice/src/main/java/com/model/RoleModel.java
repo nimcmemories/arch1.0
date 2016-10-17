@@ -19,8 +19,8 @@ public class RoleModel extends BaseBean {
 	private Long roleId;
 	private String name;
 	private String description;
-	private Set<ACListModel> acListModel;
-	private Set<ACLinkListModel> linkAclList;
+	private Set<EventModel>   eventModel;
+	private Set<LinkModel> linkModel;
 	
 	public RoleModel() {
 	}
@@ -56,20 +56,22 @@ public class RoleModel extends BaseBean {
 		return new JSONObject(this).toString();
 	}
 
-	public Set<ACListModel> getAcListModel() {
-		return acListModel;
+	public Set<EventModel> getEventModel() {
+		return eventModel;
 	}
 
-	public void setAcListModel(Set<ACListModel> acListModel) {
-		this.acListModel = acListModel;
+	public void setEventModel(Set<EventModel> eventModel) {
+		this.eventModel = eventModel;
 	}
 
-	public Set<ACLinkListModel> getLinkAclList() {
-		return linkAclList;
+
+	public Set<LinkModel> getLinkModel() {
+		return linkModel;
 	}
 
-	public void setLinkAclList(Set<ACLinkListModel> linkAclList) {
-		this.linkAclList = linkAclList;
+	public void setLinkModel(Set<LinkModel> linkModel) {
+		this.linkModel = linkModel;
 	}
+
 	
 }

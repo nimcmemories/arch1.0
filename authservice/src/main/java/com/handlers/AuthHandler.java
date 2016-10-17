@@ -47,8 +47,8 @@ public class AuthHandler {
 				responseJSON.put("statusDescription","User is not authorized");
 			}else{
 				Map<String, Object> userInfo = new HashMap<String,Object>();
-				userInfo.put("userACL", userModel.getRoleModel().getAcListModel());
-				userInfo.put("userLinkACL", userModel.getRoleModel().getLinkAclList());
+				userInfo.put("userACL", userModel.getRoleModel().getEventModel());
+				userInfo.put("userLinkACL", userModel.getRoleModel().getLinkModel());
 				responseJSON.put("responseInfo", userInfo);
 				responseJSON.put("status", 200);
 			}

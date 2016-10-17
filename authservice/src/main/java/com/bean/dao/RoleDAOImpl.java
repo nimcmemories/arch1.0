@@ -13,8 +13,9 @@ public class RoleDAOImpl extends AbstractDAO implements RoleDAO{
 	public RoleModel getRoleModel() {
 		Criteria criteria = getSession().createCriteria(RoleModel.class);
 		RoleModel roleModel = (RoleModel) criteria.list().get(0);
-		Hibernate.initialize(roleModel.getAcListModel());
-		System.out.println("role dao impl " + roleModel.getAcListModel().iterator().next().getDescription());
+		Hibernate.initialize(roleModel.getEventModel());
+		Hibernate.initialize(roleModel.getLinkModel());
+		System.out.println("role accessible link dao impl " + roleModel.getLinkModel().iterator().next().getName());
 		return roleModel;
 	}
 
