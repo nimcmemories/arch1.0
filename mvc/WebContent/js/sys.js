@@ -1,4 +1,5 @@
 var sys={};
+sys.abc = {};
 sys.contextPath="./do";
 sys.home = "./";
 sys.sessionTestJson = {"method":"POST","formData":{"test":"test"},"__eventid":2,"dataType":"json","url":"/ok"};

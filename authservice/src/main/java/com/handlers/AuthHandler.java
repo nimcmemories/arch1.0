@@ -13,6 +13,7 @@ import com.bean.service.AclDAOService;
 import com.bean.service.AclDAOServiceImpl;
 import com.bean.service.RoleDAOService;
 import com.bean.service.UserDAOService;
+import com.model.ACLinkListModel;
 import com.model.ACListModel;
 import com.model.UserModel;
 
@@ -32,7 +33,7 @@ public class AuthHandler {
 	}
 	
 	@RequestMapping(value="/auth",method = RequestMethod.POST)
-	public JSONObject getAuthAndACLList(@RequestBody JSONObject formData){
+	public String getAuthAndACLList(@RequestBody JSONObject formData){
 		
 		System.out.println(" getAuthAndACLList : call from alien API  " + formData.toString());
 		UserModel userModel;
@@ -46,9 +47,9 @@ public class AuthHandler {
 				responseJSON.put("status",411);
 				responseJSON.put("statusDescription","User is not authorized");
 			}else{
-				Map<String, Object> userInfo = new HashMap<String,Object>();
-				userInfo.put("userACL", userModel.getRoleModel().getEventModel());
-				userInfo.put("userLinkACL", userModel.getRoleModel().getLinkModel());
+				JSONObject userInfo = new JSONObject();
+				userInfo.put("userACL", ACListModel.getJsonObjectFromList(userModel.getAcListModel()));
+				userInfo.put("userLinkACL", ACLinkListModel.getJsonObjectFromList(userModel.getRoleModel().getLinkModel()));
 				responseJSON.put("responseInfo", userInfo);
 				responseJSON.put("status", 200);
 			}
@@ -56,10 +57,11 @@ public class AuthHandler {
 		}catch(Exception e){
 			e.printStackTrace();
 			return new JSONObject().put("status", 411)
-								   .put("statusDescription","User is not authorized");
+								   .put("statusDescription","User is not authorized").toString();
 		}
-		return responseJSON;
+		return responseJSON.toString();
 	}
+
 
 	public void setUserDAOServiceImpl(UserDAOService userDAOServiceImpl) {
 		this.userDAOServiceImpl = userDAOServiceImpl;

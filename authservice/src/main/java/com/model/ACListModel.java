@@ -1,5 +1,8 @@
 package com.model;
 
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.bean.BaseBean;
@@ -59,7 +62,22 @@ public class ACListModel extends BaseBean {
 		this.roleId = roleId;
 	}
 	public String toString(){
-		return new JSONObject(this).toString();
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("roleId", roleId);
+		jsonObject.put("aclListId", aclListId);
+		jsonObject.put("eventId", eventId);
+		jsonObject.put("name", name);
+		jsonObject.put("description", description);
+		jsonObject.put("accessRight", accessRight);
+		return jsonObject.toString();
 	}
+	public static JSONArray getJsonObjectFromList(List<ACListModel> acListModel){
+		JSONArray jsonObject = new JSONArray();
+		for(ACListModel acList : acListModel){
+			jsonObject.put(new JSONObject(acList.toString()));
+		}
+		return jsonObject;
+	}
+	
 	
 }

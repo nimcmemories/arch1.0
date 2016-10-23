@@ -20,7 +20,7 @@
         
 	</class>
 	<class name="com.model.LinkModel" table="t_links">
-		<id name="linkId" type="java.lang.Integer" column="linkid">
+		<id name="linkId" type="java.lang.Long" column="linkid">
 			<generator class="native"/>
 		</id>
 		<property name="name" column="name"/>

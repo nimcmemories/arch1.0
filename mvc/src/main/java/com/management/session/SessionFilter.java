@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -95,11 +96,10 @@ public class SessionFilter implements Filter {
 			}else{
 				System.out.println("authenticate user : " + userName);
 				JSONObject authJson =  AuthAPICaller.authenticateUser(userName,password);
-				System.out.println(" ~~~~ after  authentication attempt " + authJson);
-				if(APIUtils.isExpectedJSON(authJson, "responseInfo") && (Double)authJson.get("status") == 200){
-					System.out.println("~~~ responseInfo is present in the JSON");
+				if(APIUtils.isExpectedJSON(authJson, "responseInfo") && (Integer)authJson.get("status") == 200){
 					request.setAttribute("authJson", authJson);
 					request.getSession().setAttribute("userInfo", authJson);
+					prepareUserInfo(authJson,request.getSession());
 					return true;
 				}
 			}
@@ -124,7 +124,22 @@ public class SessionFilter implements Filter {
 	}
 	
 	
-	
+	/**
+	 * This method will parse json received from AuthHandler and will make proper user information
+	 */
+	private void prepareUserInfo(JSONObject jsonObject,HttpSession session){
+		JSONObject userInfoJsonObject = new JSONObject(jsonObject.getJSONObject("responseInfo").toString());
+		userInfoJsonObject = userInfoJsonObject.getJSONObject("responseInfo");
+		JSONArray userACL = userInfoJsonObject
+				.getJSONArray("userACL"),
+				userLinkACL = userInfoJsonObject.getJSONArray("userLinkACL");
+		System.out.println(" user has access over below requests ");
+		System.out.println("~~~~ : " + userACL );
+		System.out.println(" user has access over below links ");
+		System.out.println("~~~~ : " + userLinkACL);
+		session.setAttribute("linkACL", userLinkACL);
+		session.setAttribute("requestACL", userACL);
+	}
 	@Override
 	public void destroy() {
 		System.out.println("destroy filter method..");

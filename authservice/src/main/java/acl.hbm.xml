@@ -33,8 +33,8 @@
         </id>
         <property name="name" column="name" />
         <property name="password" column="password" />
-       <one-to-one name="roleModel" class="com.model.RoleModel"
-			cascade="save-update" />
+         <many-to-one name="roleModel" column="roleid" unique="true"
+       class="com.model.RoleModel" not-null="true"/>
         
     </class> 
 </hibernate-mapping>

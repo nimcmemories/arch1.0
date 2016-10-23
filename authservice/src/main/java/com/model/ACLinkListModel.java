@@ -1,5 +1,9 @@
 package com.model;
 
+import java.util.List;
+import java.util.Set;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.bean.BaseBean;
@@ -22,9 +26,7 @@ public class ACLinkListModel extends BaseBean {
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
-	public String toString(){
-		return new JSONObject(this).toString();
-	}
+
 
 	public int getAccessType() {
 		return accessType;
@@ -48,6 +50,23 @@ public class ACLinkListModel extends BaseBean {
 
 	public void setLinkAclId(Long linkAclId) {
 		this.linkAclId = linkAclId;
+	}
+	
+	@Override
+	public String toString(){
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("roleId", roleId);
+		jsonObject.put("linkId", linkId);
+		jsonObject.put("linkAclId", linkAclId);
+		jsonObject.put("accessType", accessType);
+		return jsonObject.toString();
+	}
+	public static JSONArray getJsonObjectFromList(Set<LinkModel> acLinkListModel){
+		JSONArray jsonObject = new JSONArray();
+		for(LinkModel acList : acLinkListModel){
+			jsonObject.put(new JSONObject(acList.toString()));
+		}
+		return jsonObject;
 	}
 	
 }

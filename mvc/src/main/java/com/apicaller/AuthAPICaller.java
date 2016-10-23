@@ -14,7 +14,7 @@ import com.utils.APIUtils;
  *
  */
 public class AuthAPICaller {
-	private static String API_URL = "http://localhost:8080/authservice/";
+	private static String API_URL = "http://localhost:8080/arch1.1_auth/";
 	/** 
 	 * 
 	 * Method is responsible for calling remote API for authentication.
@@ -39,7 +39,7 @@ public class AuthAPICaller {
 				JSONObject formData = new JSONObject();
 				formData.put("username",username);
 				formData.put("password",password);
-				JSONObject formResponse = restTemplate.postForObject(API_URL+"auth", formData, JSONObject.class); 
+				JSONObject formResponse = new JSONObject(restTemplate.postForObject(API_URL+"auth", formData, String.class)); 
 				System.out.println(" response from rest : " + formResponse);
 				authJson.put("status", formResponse.get("status"));
 				authJson.put("username",username);

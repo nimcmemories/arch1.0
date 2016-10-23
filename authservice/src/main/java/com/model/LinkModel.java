@@ -17,7 +17,7 @@ import com.bean.BaseBean;
  *
  */
 public class LinkModel extends BaseBean {
-	private Integer linkId;
+	private Long linkId;
 	private String name;
 	private Set<EventModel> eventModel;
 	private ACLinkListModel aclLinkListModel;
@@ -34,10 +34,10 @@ public class LinkModel extends BaseBean {
 	public String toString(){
 		return new JSONObject(this).toString();
 	}
-	public Integer getLinkId() {
+	public Long getLinkId() {
 		return linkId;
 	}
-	public void setLinkId(Integer linkId) {
+	public void setLinkId(Long linkId) {
 		this.linkId = linkId;
 	}
 	public Set<EventModel> getEventModel() {

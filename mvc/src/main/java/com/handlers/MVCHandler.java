@@ -1,5 +1,9 @@
 package com.handlers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +34,11 @@ public class MVCHandler {
 	}
 
 	@RequestMapping(value = "/ok", method = RequestMethod.POST)
-	public @ResponseBody String isOk() {
+	public @ResponseBody String isOk(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
 		System.out.println("blank value of auth for this request : " );
-		return "{\"status\":\"ok\"}";
+		return ((JSONObject)session.getAttribute("userInfo")).toString();
 
 	}
 	
@@ -41,9 +47,10 @@ public class MVCHandler {
 	 * @return response json includes status and other messages
 	 */
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public @ResponseBody String authenticate(@RequestParam("formData") String data) {
+	public @ResponseBody String authenticate(@RequestParam("formData") String data,HttpServletRequest request) {
 		System.out.println("blank value of auth for this request : " + data);
-		//AuthAPICaller.authenticateUser(data);
+		System.out.println(" session user info obj from MVCHandler : " + request.getSession().getAttribute("userInfo"));
+		
 		return "{\"status\":\"ok\"}";
 	}
 	

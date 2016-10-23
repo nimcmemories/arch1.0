@@ -8,8 +8,10 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.model.ACLinkListModel;
 import com.model.ACListModel;
 import com.model.EventModel;
+import com.model.LinkModel;
 import com.model.UserModel;
 @Transactional
 public class UserDAOImpl extends AbstractDAO implements UserDAO{
@@ -26,9 +28,16 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO{
 		Hibernate.initialize(userModel.getRoleModel().getEventModel());
 		Hibernate.initialize(userModel.getRoleModel().getLinkModel());
 		Query queryToLoadEventACLs = getSession().createQuery("from ACListModel where roleId = :roleId  and eventId in :eventIdList" );
+		Query queryToLoadLinkACLs = getSession().createQuery("from ACLinkListModel where roleId = :roleId  and linkId in :linkIdList" );
 		queryToLoadEventACLs.setParameter("roleId", userModel.getRoleModel().getRoleId());
 		queryToLoadEventACLs.setParameterList("eventIdList", getEventIds(userModel.getRoleModel().getEventModel()));
+		
+		queryToLoadLinkACLs.setParameter("roleId", userModel.getRoleModel().getRoleId());
+		queryToLoadLinkACLs.setParameterList("linkIdList", getLinkIds(userModel.getRoleModel().getLinkModel()));
 		List<ACListModel> acListModel = queryToLoadEventACLs.list();
+		List<ACLinkListModel> acLinkListModel = queryToLoadLinkACLs.list();
+		userModel.setAcListModel(acListModel);
+		userModel.setAcLinkListModel(acLinkListModel);
 		
 		System.out.println(" user model retrieved from DB : accessrigt finally" + acListModel.get(0).getAccessRight());
 		}catch(Exception e){
@@ -48,6 +57,20 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO{
 			eventIds.add(eventModel.getAclEventId());
 		}
 		 return eventIds;
+	}
+
+	
+	/**
+	 * This method is helpful in getting linkIds for query or any other purpose
+	 * @param setEventModel
+	 * @return
+	 */
+	private List<Long> getLinkIds(Set<LinkModel> setLinkModel){
+		List<Long> linkIds = new ArrayList<Long>();
+		for(LinkModel linkModel : setLinkModel){
+			linkIds.add(linkModel.getLinkId());
+		}
+		 return linkIds;
 	}
 	
 }
