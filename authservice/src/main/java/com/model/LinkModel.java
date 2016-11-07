@@ -19,8 +19,10 @@ import com.bean.BaseBean;
 public class LinkModel extends BaseBean {
 	private Long linkId;
 	private String name;
+	
 	private Set<EventModel> eventModel;
 	private ACLinkListModel aclLinkListModel;
+	private LinkGroup setLinkGroup;
 	public LinkModel(){
 		
 	}
@@ -49,9 +51,11 @@ public class LinkModel extends BaseBean {
 	public ACLinkListModel getAclLinkListModel() {
 		return aclLinkListModel;
 	}
-	public void setAclLinkListModel(ACLinkListModel aclLinkListModel) {
-		this.aclLinkListModel = aclLinkListModel;
+	public LinkGroup getSetLinkGroup() {
+		return setLinkGroup;
 	}
-
+	public void setSetLinkGroup(LinkGroup setLinkGroup) {
+		this.setLinkGroup = setLinkGroup;
+	}
 	
 }

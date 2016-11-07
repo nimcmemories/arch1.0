@@ -25,6 +25,10 @@
 		</id>
 		<property name="name" column="name"/>
 		
+		 <many-to-one name="setLinkGroup" column="linkgroupid" 
+       class="com.model.LinkGroup" not-null="true"/>
+		
+		
 		<set name="eventModel"
 				inverse="true" lazy="true" fetch="select">
             <key>
@@ -32,6 +36,25 @@
             </key>
             <one-to-many class="com.model.EventModel" />
         </set>
+	</class>
+	
+	<class name="com.model.MainSystem" table="t_mainsystem">
+		<id name="systemId" type="java.lang.Long"  column="systemid">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="name"/>
+		
+		
+	</class>
+	
+	
+	<class name="com.model.LinkGroup" table="t_linkgroup">
+		<id name="linkGroupId" type="java.lang.Long" column="linkgroupid">
+			<generator class="native"/>
+		</id>
+		<property name="name" column="name"/>
+		
+		<one-to-one name="mainSystem" lazy="false" fetch="select" class="com.model.MainSystem"></one-to-one>
 	</class>
 	
     <class name="com.model.RoleModel" table="t_role">
@@ -51,7 +74,7 @@
             </many-to-many>
         </set>
         <set name="linkModel" table="t_linkacl"
-        	inverse="false" lazy="true" fetch="select" cascade="all" >
+        	inverse="false" lazy="false" fetch="select" cascade="all" >
             <key>
                 <column name="roleid" not-null="true" />
             </key>

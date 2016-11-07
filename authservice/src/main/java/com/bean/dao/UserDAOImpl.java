@@ -24,6 +24,10 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO{
 		query.setParameter("password",password);
 		UserModel userModel = null;
 		try{
+			if(query.list().size() < 1){
+				System.out.println(" probable cause is not a valid user  : ");
+				return userModel;
+			}
 		userModel= (UserModel) query.list().get(0);
 		Hibernate.initialize(userModel.getRoleModel().getEventModel());
 		Hibernate.initialize(userModel.getRoleModel().getLinkModel());
@@ -69,6 +73,9 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO{
 		List<Long> linkIds = new ArrayList<Long>();
 		for(LinkModel linkModel : setLinkModel){
 			linkIds.add(linkModel.getLinkId());
+			Hibernate.initialize(linkModel.getSetLinkGroup());
+			System.out.println("link Group Initialized ");
+			System.out.println("main system Initialized " + linkModel.getSetLinkGroup().getName());
 		}
 		 return linkIds;
 	}
