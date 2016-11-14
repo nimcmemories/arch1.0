@@ -34,61 +34,13 @@
           </div>
           <!-- /top tiles -->
 		<div class="row">
-            <div class="animated flipInX col-md-4">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2 >Swap Eligibility <small></small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <article class="media event">
-                    <a class="pull-left date">
-                      <p class="day glyphicon glyphicon-sort"></p>
-                    </a>
-                    <div class="media-body">
-                      <a class="title" id="tbluSwapEligibility" href="#">Swap Eligibility</a>
-                      <p>To track customer's having EOL/non-eligible devices</p>
-                    </div>
-                  </article>
-                  <article class="media event">
-                    <a class="pull-left date">
-                      <p class="day glyphicon glyphicon-asterisk"></p>
-                    </a>
-                    <div class="media-body">
-                      <a class="title" href="#">Swap Fallouts</a>
-                      <p>To track customer's orders which did not complete successfully henceforth 
-                      other arrangements are made</p>
-                    </div>
-                  </article>
-                  <article class="media event">
-                    <a class="pull-left date">
-                      <p class="day glyphicon glyphicon-cog"></p>
-                    </a>
-                    <div class="media-body">
-                      <a class="title" href="#">Failed SIKs</a>
-                      <p>To track orders which were of type SIK but failed and for which other arrangements are made</p>
-                    </div>
-                  </article>
-                  
-                </div>
-              </div>
-            </div>
-			<div id="rightPanelDashboard"class="animated flipInX col-md-8">
+           <div id="rightPanelDashboard"class="animated flipInX col-md-12">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Dashboard <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li><a class="zoom-in"><i class="fa fa-desktop"></i></a>
-                    </li>
-                   
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -98,16 +50,13 @@
                 
               </div>
             </div>
+			
             
           </div>
 
        <script type="text/javascript">
        $(document).ready(function() {
-    	   console.log("opvred f1unction");
-    	   $('.collapse-link').on('click',indexObject.functionCollapse);
-    	   $('.close-link').click(indexObject.functionClose);
-    	   $("#tbluSwapEligibility").click(indexObject.f_addSwapEligibility);
-    	   $(".zoom-in").click(indexObject.f_showEntireDesktop);
+    	   indexObject.f_addSwapEligibility();
        });
        </script>
 

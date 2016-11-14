@@ -92,6 +92,7 @@ $(document).ready(function() {
 
     // toggle small or large menu
     $MENU_TOGGLE.on('click', function() {
+    	console.log("click large menu : " );
         if ($BODY.hasClass('nav-md')) {
             $SIDEBAR_MENU.find('li.active ul').hide();
             $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
@@ -135,6 +136,7 @@ $(document).ready(function() {
 // Panel toolbox
 $(document).ready(function() {
     $('.collapse-link').on('click', function() {
+    	console.log("output from collapse link function ... nimc");
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
             $BOX_CONTENT = $BOX_PANEL.find('.x_content');
