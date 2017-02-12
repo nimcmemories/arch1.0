@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+  <groupId>arch1.0_mvc</groupId>  
+  <artifactId>arch1.0_mvc</artifactId>  
+  <packaging>war</packaging>  
+  <version>0.0.1-SNAPSHOT</version>  
+  <name>Architecture 1.0 MVC  framework</name>  
+  <url>http://maven.apache.org</url>  
+  <dependencies>  
+    <dependency>  
+   <groupId>javax.servlet</groupId>  
+   <artifactId>javax.servlet-api</artifactId>  
+   <version>3.1.0</version>  
+  </dependency>  
+   <dependency>
+   <groupId>log4j</groupId>
+   <artifactId>log4j</artifactId>
+   <version>${log4j.version}</version>
+  </dependency>
+  <dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20160810</version>
+	</dependency>
+  <dependency>
+   <groupId>org.springframework</groupId>
+   <artifactId>spring-jdbc</artifactId>
+   <version>${spring.version}</version>
+  </dependency>
+  <dependency>  
+   <groupId>org.springframework</groupId>  
+   <artifactId>spring-core</artifactId>  
+   <version>${spring.version}</version>  
+  </dependency>  
+  
+  <dependency>  
+   <groupId>org.springframework</groupId>  
+   <artifactId>spring-webmvc</artifactId>  
+   <version>${spring.version}</version>  
+  </dependency>  
+    <dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>9.4-1200-jdbc41</version>
+</dependency>
+  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-entitymanager</artifactId>
+    <version>4.3.5.Final</version>
+</dependency>
+<dependency>
+   <groupId>org.springframework</groupId>
+   <artifactId>spring-orm</artifactId>
+   <version>${spring.version}</version>
+  </dependency>
+<dependency>
+   <groupId>com.google.code.gson</groupId>
+   <artifactId>gson</artifactId>
+   <version>2.2.2</version>
+  </dependency>
+   <!--  <dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-databind</artifactId>
+   <version>2.6.3</version>
+ </dependency> -->
+ 
+ <dependency>
+   <groupId>org.codehaus.jackson</groupId>
+   <artifactId>jackson-mapper-asl</artifactId>
+   <version>1.9.10</version>
+ </dependency>
+	
+ </dependencies>  
+ <build>  
+  <finalName>mvc</finalName>  
+  
+  <plugins>  
+   <plugin>  
+    <groupId>org.apache.maven.plugins</groupId>  
+    <artifactId>maven-compiler-plugin</artifactId>  
+    <version>3.1</version>  
+    <configuration>  
+     <source>${jdk.version}</source>  
+     <target>${jdk.version}</target>  
+    </configuration>  
+   </plugin>  
+  </plugins>  
+  
+ </build>  
+ <properties>  
+  <spring.version>4.2.1.RELEASE</spring.version>
+  <hibernate.version>4.3.5.Final</hibernate.version>
+   <log4j.version>1.2.17</log4j.version>
+  <jdk.version>1.7</jdk.version>  
+ </properties>
+  
+    
+</project>  

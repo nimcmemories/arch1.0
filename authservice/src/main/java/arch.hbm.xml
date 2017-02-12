@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.application.bean">
+    <class name="MainSystemBean" table="t_mainsystem">
+        <id name="systemid" column="systemid">
+            <generator class="sequence">
+            	<param name="sequence">seq_mainsystem</param>
+            </generator>
+        </id>
+        <property name="name" column="name" not-null="true"/>
+        <property name="description" column="description" type="java.lang.String"/>
+        <property name="created_by" column="created_by" />
+        <property name="modified_by" column="modified_by" />
+        <property name="created" column="created"/>
+        <property name="modified" column="modified"/>
+        <set name="setModuleBean" table="t_module"
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="systemid" not-null="true" />
+            </key>
+            <one-to-many class="ModuleBean" />
+        </set>
+        
+    </class> 
+    
+    <class name="ModuleBean" table="t_module">
+        <id name="id" column="id">
+            <generator class="sequence">
+            	<param name="sequence">sq_t_mainsystem</param>
+            </generator>
+        </id>
+        <many-to-one name="mainSystem" fetch="select"  class="MainSystemBean">
+				<column name="systemid"></column>
+			</many-to-one>
+        <property name="module_name" column="module_name" not-null="true"/>
+        <property name="created_by" column="created_by" not-null="true"/>
+        <property name="modified_by" column="modified_by" not-null="true"/>
+        <property name="created" column="created"/>
+        <property name="modified" column="modified"/>
+    </class> 
+   
+</hibernate-mapping>

@@ -38,25 +38,12 @@
   class="org.springframework.orm.hibernate4.HibernateTransactionManager">
   <property name="sessionFactory" ref="sessionFactory" />
  </bean>
- <bean id="authHandler" class="com.handlers.AuthHandler">
- 	<property name="aclDAOServiceImpl" ref="aclDaoService"/>
- 	<property name="roleDAOServiceImpl" ref="roleDaoService"/>
- 	<property name="userDAOServiceImpl" ref="userDaoService"/>
- 	
- </bean>
+ 
  <bean id="persistenceExceptionTranslationPostProcessor"
   class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
- <bean id="aclCategoryService" class="com.bean.AclCategoryServiceImpl"></bean>
- <bean id="aclDaoImpl" class="com.bean.dao.AclDAOImpl"/>
- <bean id="roleDaoImpl" class="com.bean.dao.RoleDAOImpl"/>
- <bean id="aclDaoService" class="com.bean.service.AclDAOServiceImpl" >
- 	<property name="aclDaoImpl" ref="aclDaoImpl"/>
- </bean>
- <bean id="roleDaoService" class="com.bean.service.RoleDAOServiceImpl" >
- 	<property name="roleDAOImpl" ref="roleDaoImpl"/>
- </bean>
-  <bean id="userDAOImpl" class="com.bean.dao.UserDAOImpl"/>
-  <bean id="userDaoService" class="com.bean.service.UserDAOServiceImpl" >
- 	<property name="userDAOImpl" ref="userDAOImpl"/>
+ 
+  <bean id="mainSystemProxy" class="com.application.dao.impl.MainSystemProxyImpl"/>
+  <bean id="mainSystemServiceImpl" class="com.application.service.impl.MainSystemServiceImpl" >
+ 	<property name="mainSystemProxy" ref="mainSystemProxy"/>
  </bean>
 </beans>  

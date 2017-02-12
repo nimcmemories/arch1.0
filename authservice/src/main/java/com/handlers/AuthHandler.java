@@ -4,30 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.application.service.MainSystemService;
 import com.bean.service.AclDAOService;
 import com.bean.service.AclDAOServiceImpl;
 import com.bean.service.RoleDAOService;
 import com.bean.service.UserDAOService;
-import com.model.ACListModel;
 import com.model.UserModel;
 
 @RestController
 public class AuthHandler {
-	private AclDAOService aclDAOServiceImpl;
-	private RoleDAOService roleDAOServiceImpl;
 	private UserDAOService userDAOServiceImpl;
 	 
-	
+	@Autowired
+	private MainSystemService mainSystemServiceImpl;
+
+	public void setMainSystemServiceImpl(MainSystemService mainSystemServiceImpl) {
+		this.mainSystemServiceImpl = mainSystemServiceImpl;
+	}
 
 	@RequestMapping(value="/ok",method = RequestMethod.GET)
 	public String isOk(){
-		System.out.println(" role dao : " + roleDAOServiceImpl.getServiceRoleModel().getName());
-		aclDAOServiceImpl.getAcl();
+		System.out.println(" main system json : " + mainSystemServiceImpl.getMainSystemJSON());
 		return "Arc1.0 Auth Service working OK.";
 	}
 	
@@ -63,13 +66,5 @@ public class AuthHandler {
 
 	public void setUserDAOServiceImpl(UserDAOService userDAOServiceImpl) {
 		this.userDAOServiceImpl = userDAOServiceImpl;
-	}
-
-	public void setRoleDAOServiceImpl(RoleDAOService roleDAOServiceImpl) {
-		this.roleDAOServiceImpl = roleDAOServiceImpl;
-	}
-
-	public void setAclDAOServiceImpl(AclDAOServiceImpl aclDAOServiceImpl) {
-		this.aclDAOServiceImpl = aclDAOServiceImpl;
 	}
 }
